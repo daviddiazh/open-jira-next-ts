@@ -11,19 +11,19 @@ const Entries_INITIAL_STATE: EntriesState = {
     entries: [
         {
             _id: uuidv4(),
-            description: 'Lorem ipsum, dior dolor duis elit sumit ui laborum',
+            description: 'Pendiente: Lorem ipsum, dior dolor duis elit sumit ui laborum',
             status: 'pending',
             createdAt: Date.now()
         },
         {
             _id: uuidv4(),
-            description: 'Lorem ipsum, dior dolor duis elit sumit ui laborum',
+            description: 'En Progreso: Lorem ipsum, dior dolor duis elit sumit ui laborum',
             status: 'in-progress',
             createdAt: Date.now() - 10000000
         },
         {
             _id: uuidv4(),
-            description: 'Lorem ipsum, dior dolor duis elit sumit ui laborum',
+            description: 'Terminado: Lorem ipsum, dior dolor duis elit sumit ui laborum',
             status: 'finished',
             createdAt: Date.now() - 100000
         },
