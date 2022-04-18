@@ -1,7 +1,8 @@
-import { FC, useReducer } from 'react';
+import { FC, useReducer, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid'
 import { Entry } from '../../interfaces';
 import { EntriesContext, entriesReducer } from './';
+import { entriesApi } from '../../apis/';
 
 
 export interface EntriesState{
@@ -32,6 +33,16 @@ export const EntriesProvider: FC = ({ children }) => {
     const updateEntry = ( entry: Entry ) => {
         dispatch({ type: 'Entry - Entry-Update', payload: entry })
     }
+
+    const refreshEntries = async () => {
+        const { data } = await entriesApi.get<Entry[]>('/entries')
+        dispatch({ type: 'Entry - Refresh-Data', payload: data })
+    }
+
+    useEffect(() => {
+      refreshEntries();
+    }, [])
+    
 
     return (
         <EntriesContext.Provider value={{
