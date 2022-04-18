@@ -7,7 +7,7 @@ export function middleware(req: NextRequest, ev: NextFetchEvent){
     
     const checkMongoIDRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 
-    if ( !mongoose.isValidObjectId( id ) ){
+    if ( !checkMongoIDRegExp.test( id ) ){
         //return res.status(400).json({ message: `El ID ${id} no es valido` })
         return new Response(JSON.stringify({ message: `El ID ${id} no es valido` }), {
             status: 400,
