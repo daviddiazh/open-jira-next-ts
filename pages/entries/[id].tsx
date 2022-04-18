@@ -5,13 +5,15 @@ import { Button, Card, CardActions, CardContent, CardHeader, FormControl, FormCo
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { Layout } from '../../components/layouts';
-import { EntryStatus } from '../../interfaces/entry';
+import { EntryStatus, Entry } from '../../interfaces';
+import entriesApi from '../../apis/entriesApi';
+import { dbEntries } from '../../database';
 
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 
 interface Props {
-
+    entry: Entry;
 }
 
 export const EntryPage: FC<Props> = ( props ) => {
@@ -36,6 +38,10 @@ export const EntryPage: FC<Props> = ( props ) => {
         console.log({ inputValue, status })
     }
 
+    // const onDeleted = async ({ _id, description, status }: Entry) => {
+    //     const { data } = await entriesApi.delete(`/entries/${_id}`)
+    // }
+
   return (
     <Layout title='... ... ...'>
         <Grid
@@ -45,10 +51,13 @@ export const EntryPage: FC<Props> = ( props ) => {
         >
             <Grid item xs={ 12 } sm={ 8 } md={ 6 } >
                 <Card>
-                    <CardHeader
+                    <Card>
+                        <CardHeader
                         title={`Entrada: ${ inputValue }`}
                         subheader={`Creada hace: ... minutos`}
                     />
+                    </Card>
+                    
                      <CardContent>
                          <TextField 
                             sx={{ marginTop: 2, marginBottom: 1 }} 
@@ -103,8 +112,10 @@ export const EntryPage: FC<Props> = ( props ) => {
             position: 'fixed',
             bottom: 30,
             right: 30,
-            backgroundColor: 'red'
-        }}>
+            backgroundColor: 'red',
+        }}
+            //onClick={onDeleted(_id, description, status)}
+        >
             <DeleteOutlinedIcon />
         </IconButton>
 
@@ -120,6 +131,8 @@ export const EntryPage: FC<Props> = ( props ) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     
     const { id } = params as { id: string }
+
+    const entry = await dbEntries.getEntryById(id);
 
     if( !isValidObjectId(id) ){
         return{
