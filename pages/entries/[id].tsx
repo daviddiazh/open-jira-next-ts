@@ -9,6 +9,7 @@ import { EntryStatus, Entry } from '../../interfaces';
 import entriesApi from '../../apis/entriesApi';
 import { dbEntries } from '../../database';
 import { EntriesContext } from '../../context/entries/EntriesContext';
+import { dateFunctions } from '../../utils';
 
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
@@ -64,7 +65,7 @@ export const EntryPage: FC<Props> = ({ entry }) => {
                     <Card>
                         <CardHeader
                         title={`Entrada:`}
-                        subheader={`Creada hace: ${ entry.createdAt }`}
+                        subheader={`${ dateFunctions.getFortmatDistanceToNow( entry.createdAt ) }`}
                     />
                     </Card>
                     
