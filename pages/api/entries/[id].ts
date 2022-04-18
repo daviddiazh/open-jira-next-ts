@@ -4,7 +4,7 @@ import { db } from '../../../database';
 import { Entry } from '../../../models';
 import { IEntry } from '../../../models/Entry';
 
-type Data = 
+type Data =
 |   {message: string}
 |   IEntry
 
@@ -12,14 +12,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
     const {id } = req.query;
 
-    if ( !mongoose.isValidObjectId( id ) ){
-        return res.status(400).json({ message: `El ID ${id} no es valido` })
-    }
+    // if ( !mongoose.isValidObjectId( id ) ){
+    //     return res.status(400).json({ message: `El ID ${id} no es valido` })
+    // }
 
     switch( req.method ){
         case 'GET':
             return getEntry(req, res);
-        case 'PUT': 
+        case 'PUT':
             return updateEntry(req, res);
         default:
             return res.status(400).json({ message: 'El METODO no existe' })

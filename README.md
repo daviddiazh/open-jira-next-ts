@@ -14,7 +14,7 @@ docker-compose up -d
 ## Configurar las variables de entorno
 Renombrar el archivo __.env.template__ a __.env__
 
-## Llenar la base de datos con datos de pruebas
+## Llenaro Resetear la base de datos con datos de pruebas
 Llamar el endPoint: 
 ```
     http://localhost:3000/api/seed
