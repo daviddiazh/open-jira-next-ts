@@ -1,8 +1,33 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, TextField } from '@mui/material';
+import { useState, ChangeEvent } from 'react';
+import { Button, Card, CardActions, CardContent, CardHeader, FormControl, FormControlLabel, FormLabel, Grid, RadioGroup, TextField, Radio, capitalize, IconButton } from '@mui/material';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { Layout } from '../../components/layouts';
+import { EntryStatus } from '../../interfaces/entry';
+
+
+const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
+
 
 export const EntryPage = () => {
+
+    const [inputValue, setInputValue] = useState('');
+    const [status, setStatus] = useState<EntryStatus>('pending');
+    const [touched, setTouched] = useState(false);
+
+    const onInputValueChanged = ( event: ChangeEvent<HTMLInputElement> ) => {
+        setInputValue( event.target.value );
+    }
+
+    const onStatusChanged = ( event: ChangeEvent<HTMLInputElement> ) => {
+        console.log(event.target.value)
+        setStatus( event.target.value as EntryStatus)
+    }
+
+    const onSave = () => {
+        console.log({ inputValue, status })
+    }
+
   return (
     <Layout title='... ... ...'>
         <Grid
@@ -13,7 +38,7 @@ export const EntryPage = () => {
             <Grid item xs={ 12 } sm={ 8 } md={ 6 } >
                 <Card>
                     <CardHeader
-                        title='Entrada:'
+                        title={`Entrada: ${ inputValue }`}
                         subheader={`Creada hace: ... minutos`}
                     />
                      <CardContent>
@@ -24,8 +49,28 @@ export const EntryPage = () => {
                             autoFocus
                             multiline
                             label='Nueva Entrada'
+                            value={ inputValue }
+                            onChange={ onInputValueChanged }
                         />
-                        {/* RADIO */}
+                        <FormControl>
+                            <FormLabel>Estado:</FormLabel>
+                            <RadioGroup
+                                row
+                                value={ status }
+                                onChange={ onStatusChanged }
+                            >
+                                {
+                                    validStatus.map( option => (
+                                        <FormControlLabel 
+                                            key={ option }
+                                            value={ option }
+                                            control={ <Radio /> }
+                                            label={ capitalize(option) }
+                                        />
+                                    ))
+                                }
+                            </RadioGroup>
+                        </FormControl>
                      </CardContent>
 
                      <CardActions>
@@ -33,6 +78,7 @@ export const EntryPage = () => {
                             startIcon={ <SaveOutlinedIcon/> }
                             variant='contained'
                             fullWidth
+                            onClick={ onSave }
                         >
                             Save
                         </Button>
@@ -40,6 +86,16 @@ export const EntryPage = () => {
                 </Card>
             </Grid>
         </Grid>
+
+        <IconButton sx={{
+            position: 'fixed',
+            bottom: 30,
+            right: 30,
+            backgroundColor: 'red'
+        }}>
+            <DeleteOutlinedIcon />
+        </IconButton>
+
     </Layout>
   )
 }
