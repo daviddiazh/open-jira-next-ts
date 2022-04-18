@@ -1,5 +1,4 @@
 import { NextRequest, NextFetchEvent, NextResponse } from 'next/server';
-import mongoose from 'mongoose';
 
 export function middleware(req: NextRequest, ev: NextFetchEvent){
 

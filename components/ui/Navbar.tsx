@@ -7,6 +7,9 @@ export const Navbar: FC = () => {
 
   const { openSideMenu } = useContext( UIContext )
 
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const currentDateTime = new Date();
+
   return (
     <AppBar position='sticky' elevation={ 8 }>
         <Toolbar>
@@ -17,7 +20,8 @@ export const Navbar: FC = () => {
             >
                 <MenuOutlinedIcon />
             </IconButton>
-            <Typography variant='h6'>OpenJira - DDH</Typography>
+            {/* {<Typography variant='h6'>OpenJira - DDH</Typography>} */}
+            <Typography>{currentDateTime.toLocaleDateString('es-ES', options)}.</Typography>
         </Toolbar>
     </AppBar>
   )
