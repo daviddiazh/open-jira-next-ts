@@ -58,7 +58,7 @@ export const Sidebar = () => {
             </List>
 
             <Box sx={{ margin: '40px 0px 10px 0px' }}>
-                <Typography variant="h6" style={{textAlign: 'center'}}>Powered By: DDH</Typography>
+                <Typography variant="h6" style={{textAlign: 'center'}}>Powered By: David Diaz H</Typography>
                 <Typography variant="body1" style={{textAlign: 'center'}}>{currentYear.getFullYear()}.</Typography>
             </Box>
 
