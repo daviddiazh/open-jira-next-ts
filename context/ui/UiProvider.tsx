@@ -13,6 +13,7 @@ const UI_INITIAL_STATE: UIState = {
     isDragging: false
 }
 
+
 export const UIProvider: FC = ({ children }) => {
 
     const [ state, dispatch ] = useReducer(uiReducer, UI_INITIAL_STATE);
