@@ -15,4 +15,4 @@ interface ContextProps {
     endDragging: () => void
 }
 
-export const UIContext = createContext({} as ContextProps);
+export const UIContext = createContext<ContextProps>({} as ContextProps);
